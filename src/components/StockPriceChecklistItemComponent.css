@@ -12,4 +12,5 @@
 
 .checklist-item-ticker-ticked {
   color: red;
+  font-weight: 800;
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import StockPriceChecklistItem, { StockPriceChecklistItemProps } from './StockPriceChecklistItemComponent';
+import StockPriceChecklistItem from './StockPriceChecklistItemComponent';
 import './StockPriceChecklistComponent.css';
 
 type TickerSelectionMap = {
