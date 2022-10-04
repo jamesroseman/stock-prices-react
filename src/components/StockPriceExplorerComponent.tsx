@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StockPricesMap } from '../types/StockPricesMap';
 import StockPriceChecklist from './StockPriceChecklistComponent';
 import './StockPriceExplorerComponent.css';
@@ -14,30 +14,36 @@ function StockPriceExplorer({
   prices
 }: StockPriceExplorerProps) {
   const tickers: string[] = Object.keys(prices);
+  const [currPricesMap, setCurrPricesMap] = useState<StockPricesMap>({});
+
+  // When a stock price is selected in the checklist, update the prices state.
+  const onTickerSelectionFn = (ticker: string) => {
+    if (Object.prototype.hasOwnProperty.call(currPricesMap, ticker)) {
+      // If the ticker exists in state, it should be removed.
+      delete currPricesMap[ticker];
+      setCurrPricesMap({ ...currPricesMap });
+    } else {
+      // If the ticker does not exist in state, it should be added.
+      setCurrPricesMap({
+        ...currPricesMap,
+        [ticker]: prices[ticker],
+      });
+    }
+  }
 
   return (
     <div className="explorer-container">
       <div className="explorer-header">Stock Data</div>
       <div className="explorer-body">
         <div className="explorer-checklist">
-          <StockPriceChecklist 
-            tickers={tickers} 
-            onTickerSelection={console.log}
-          />
+          <StockPriceChecklist tickers={tickers} onTickerSelection={onTickerSelectionFn} />
         </div>
         <div className="explorer-data">
-          <StockPriceTable 
-            dates={[
-              "1/17/2014",
-              "1/21/2014",
-              "1/22/2014"
-            ]} 
-            prices={{
-              'AAPL': [19.31, 19.61, 19.7],
-              'MSFT': [36.38, null, 35.93],
-              'AMZN': [null,  null, null],
-            }} 
-          />
+          {
+            Object.keys(currPricesMap).length === 0
+            ? <div className="explorer-data-empty-msg">Please select at least one ticker.</div>
+            : <StockPriceTable dates={dates} prices={currPricesMap} />
+          }
         </div>
       </div>
       
