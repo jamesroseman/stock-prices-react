@@ -34,19 +34,40 @@ class StockPrices implements IStockPrices {
     startDate?: string, 
     endDate?: string
   ): StockPricesMultiple {
-    // Filter out any prices which don't include tickers we're searching for
-    // todo: filter out by date range too 
+    // Filter out any prices which don't include tickers we're searching for or are out of range.
     const filteredPrices = this.sortedPrices.filter((price: any) => {
-      let shouldInclude: boolean = false;
+      // If the date of the price is outside our range, we shouldn't include it.
+      if (startDate !== undefined || endDate !== undefined) {
+        const date: string = price['date'];
+        const dateObj: Date = new Date(date);
+        if (startDate !== undefined) {
+          const startDateObj: Date = new Date(startDate);
+          if (dateObj < startDateObj) {
+            return false;
+          }
+        }
+        if (endDate !== undefined) {
+          const endDateObj: Date = new Date(endDate);
+          if (dateObj > endDateObj) {
+            return false;
+          }
+        }
+      }
+    
+      // Check all tickers to see if any are included in this price.
+      let shouldIncludeByTicker: boolean = false;
       tickers.forEach((ticker: string) => {
         if (Object.prototype.hasOwnProperty.call(price, ticker)) {
-          shouldInclude = true;
+          shouldIncludeByTicker = true;
         }
       });
-      return shouldInclude;
+      return shouldIncludeByTicker;
     });
 
+    // Get the list of dates in the filtered prices.
     const dates: string[] = filteredPrices.map((price: any) => price['date']);
+    
+    // Get the list of prices by combining different price-dates.
     const prices = filteredPrices.reduce(
       (map: StockPricesMap, price: any) => {
         tickers.forEach((ticker: string) => {
@@ -68,12 +89,18 @@ class StockPrices implements IStockPrices {
     );
 
     // If any of the tickers never appear, throw an exception.
+    tickers.forEach((ticker: string) => {
+      const nonNullPrices = prices[ticker].filter((value) => value !== null);
+      if (nonNullPrices.length === 0) {
+        throw new Error(`Ticker "${ticker}" was not found in any prices being returned.`)
+      }
+    });
 
     return {
       dates,
       prices,
     }
-    }
+  }
 }
 
 export default StockPrices;

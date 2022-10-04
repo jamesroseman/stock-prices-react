@@ -17,7 +17,7 @@ describe('StockPrices', () => {
       stockPrices = new StockPrices(testPrices);
     });
 
-    test('returns only AAPL prices', () => {
+    test('returns prices for one ticker without range', () => {
       const testTickers: string[] = ['AAPL'];
       const expectedPricesMultiple: StockPricesMultiple = {
         dates: ['1/14/2014', '1/15/2014', '1/16/2014', '1/21/2014', '1/22/2014'],
@@ -28,6 +28,48 @@ describe('StockPrices', () => {
       expect(stockPrices.getPricesMultiple(testTickers)).toEqual(expectedPricesMultiple);
     });
 
+    test('returns multiple ticker prices without range', () => {
+      const testTickers: string[] = ['AAPL', 'MSFT'];
+      const expectedPricesMultiple: StockPricesMultiple = {
+        dates: ['1/14/2014', '1/15/2014', '1/16/2014', '1/17/2014', '1/21/2014', '1/22/2014'],
+        prices: {
+          'AAPL': [19.51, 19.91, 19.79, null, 19.61, 19.7],
+          'MSFT': [35.78, null, 36.89, 36.38, 36.17, 35.93],
+        }
+      };
+      expect(stockPrices.getPricesMultiple(testTickers)).toEqual(expectedPricesMultiple);
+    });
 
+    test('returns prices for one ticker with range', () => {
+      const testTickers: string[] = ['AAPL'];
+      const startDate: string = '1/15/2014';
+      const endDate: string = '1/20/2014';
+      const expectedPricesMultiple: StockPricesMultiple = {
+        dates: ['1/15/2014', '1/16/2014'],
+        prices: {
+          'AAPL': [19.91, 19.79],
+        }
+      };
+      expect(stockPrices.getPricesMultiple(testTickers, startDate, endDate)).toEqual(expectedPricesMultiple);
+    });
+
+    test('returns multiple ticker prices with range', () => {
+      const testTickers: string[] = ['AAPL', 'MSFT'];
+      const startDate: string = '1/15/2014';
+      const endDate: string = '1/20/2014';
+      const expectedPricesMultiple: StockPricesMultiple = {
+        dates: ['1/15/2014', '1/16/2014', '1/17/2014'],
+        prices: {
+          'AAPL': [19.91, 19.79, null],
+          'MSFT': [null, 36.89, 36.38],
+        }
+      };
+      expect(stockPrices.getPricesMultiple(testTickers, startDate, endDate)).toEqual(expectedPricesMultiple);
+    });
+
+    test('throws exception if specified ticker does not appear', () => {
+      const testTickers: string[] = ['AAPL', 'MSFT', 'TWTR'];
+      expect(() => stockPrices.getPricesMultiple(testTickers)).toThrow();
+    });
   });
 });
