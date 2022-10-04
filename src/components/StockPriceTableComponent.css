@@ -5,6 +5,8 @@
 
 .table-container table {
   width: 100%;
+
+  cursor: pointer;
 }
 
 .table-container thead td {
@@ -13,6 +15,15 @@
 
   text-align: center;
   font-weight: 800;
+}
+
+.table-container tbody tr:hover {
+  background-color: #eee;
+  font-weight: 600;
+}
+
+.table-date-td {
+  width: 100px;
 }
 
 .table-price-td {

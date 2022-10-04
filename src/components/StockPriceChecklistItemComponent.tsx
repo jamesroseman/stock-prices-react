@@ -13,9 +13,9 @@ function StockPriceChecklistItem({
   onClick,
 }: StockPriceChecklistItemProps) {
   return (
-    <div className="checklist-item-container">
+    <div className="checklist-item-container" onClick={onClick}>
       <div className="checklist-item-checkbox">
-        <input type="checkbox" checked={isChecked} onChange={onClick} />
+        <input type="checkbox" checked={isChecked} />
       </div>
       <div className={isChecked ? "checklist-item-ticker-ticked" : "checklist-item-ticker-unticked"}>
         {ticker}

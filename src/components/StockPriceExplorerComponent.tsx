@@ -13,13 +13,15 @@ function StockPriceExplorer({
   dates,
   prices
 }: StockPriceExplorerProps) {
+  const tickers: string[] = Object.keys(prices);
+
   return (
     <div className="explorer-container">
       <div className="explorer-header">Stock Data</div>
       <div className="explorer-body">
         <div className="explorer-checklist">
           <StockPriceChecklist 
-            tickers={['AAPL', 'META', 'GOOGL', 'AMZN', 'AMZN', 'AMZN', 'TWTR']} 
+            tickers={tickers} 
             onTickerSelection={console.log}
           />
         </div>

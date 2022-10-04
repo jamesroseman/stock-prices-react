@@ -1,8 +1,15 @@
 .checklist-item-container {
   margin-bottom: 4px;
 
+  cursor: pointer;
+
   display: flex;
   flex-direction: row;
+}
+
+.checklist-item-container:hover {
+  font-weight: 600;
+  background-color: #eee;
 }
 
 .checklist-item-checkbox {

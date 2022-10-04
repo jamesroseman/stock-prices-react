@@ -17,14 +17,14 @@ function StockPriceTable({
 
   // Create a row for the headers, determined from the dates and tickers.
   const staticHeaders = [
-    <td>Date</td>
+    <td key="stock-price-table-date-header">Date</td>
   ];
   const tickerHeaders = alphabetizedTickers.map((ticker: string) => {
     return (
-      <td>{ticker}</td>
+      <td key={`stock-price-table-header-${ticker}`}>{ticker}</td>
     );
   });
-  const headers = [...staticHeaders, ...tickerHeaders];
+  const headers = <tr>{[...staticHeaders, ...tickerHeaders]}</tr>;
 
   // Create rows for each date with price information for each ticker.
   const rows = dates.map((date: string, index: number) => {
@@ -32,7 +32,7 @@ function StockPriceTable({
     const priceCells = alphabetizedTickers.map((ticker: string) => {
       const datePrice: number | null = prices[ticker][index];
       return (
-        <td className="table-price-td">{datePrice}</td>
+        <td key={`stock-price-table-cell-${date}${ticker}`} className="table-price-td">{datePrice}</td>
       );
     });
 
