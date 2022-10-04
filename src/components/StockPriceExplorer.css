@@ -1,3 +1,53 @@
 .container {
-  background-color: aliceblue;
+  background-color: #fff;
+
+  max-height: 100%;
+  max-width: 100%;
+  margin: 50px 30px 50px 30px;
+  padding: 3px;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid #000;
+  border-radius: 4px;
+}
+
+.header {
+  margin-bottom: 10px;
+
+  height: 40px;
+  font-size: 22px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-transform: uppercase;
+  letter-spacing: 4px;
+
+  border-bottom: 2px dotted #ddd;
+}
+
+.body {
+  background-color: green;
+
+  height: 525px;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.checklist {
+  background-color: blue;
+
+  height: 100%;
+  width: 30%;
+}
+
+.data {
+  background-color: red;
+
+  height: 100%;
+  width: 100%;
 }

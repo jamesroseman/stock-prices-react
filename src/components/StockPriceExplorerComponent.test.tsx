@@ -2,8 +2,8 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import StockPriceExplorer from './StockPriceExplorerComponent';
 
-test('renders init message', () => {
+test('renders stock data header', () => {
   render(<StockPriceExplorer dates={[]} prices={{}} />);
-  const helloWorldElement = screen.getByText(/Hello, world!/i);
-  expect(helloWorldElement).toBeInTheDocument();
+  const stockDataElement = screen.getByText(/Stock Data/i);
+  expect(stockDataElement).toBeInTheDocument();
 })

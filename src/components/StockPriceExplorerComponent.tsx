@@ -22,7 +22,12 @@ function StockPriceExplorer({
 }: StockPriceExplorerProps) {
   return (
     <div className="container">
-      Hello, world!
+      <div className="header">Stock Data</div>
+      <div className="body">
+        <div className="checklist">[ ] AAPL</div>
+        <div className="data">DATE  |  AAPL  |</div>
+      </div>
+      
     </div>
   )
 }
