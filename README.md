@@ -1,46 +1,56 @@
-# Getting Started with Create React App
+# Basic Stock Data Visualizing Component
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This sample project provides a React component (written in TypeScript) which, provided stock data, displays cells of stock prices by date.
 
-In the project directory, you can run:
+This sample project also provides a utility class for searching stock data by dates and tickers.
 
-### `npm start`
+## Project Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+src/
+|_ components/   (1)
+|_ utils/        (2)
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The most relevant files are:
 
-### `npm test`
+* `src/components/StockPriceExplorerComponent.tsx`
+* `src/utils/StockPrices.ts`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+In `App.tsx`, you'll find the `StockPriceExplorerComponent` being used.
 
-### `npm run build`
+## How to Run
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Install Dependencies
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Install the necessary dependencies by running:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`npm install`
 
-### `npm run eject`
+*Note:* This project was developed using `node v.16.15.1`, though earlier and later versions may work as well.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Run Tests
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Run tests (for the util class) by running:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+`npm test`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+You should see the following, demonstrating that all use cases for the stock price utility class are passing:
 
-## Learn More
+![Passing Jest tests](public/readme/PassingTests.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Run the Webserver
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Run the webserver by running:
+
+`npm start`
+
+You should be met with the following page in your browser. If your browser doesn't open automatically, you can find the app at `localhost:3000` by default.
+
+![Demo of web app](public/readme/WebApp.png)
+
+By clicking on the various stock tickers, you should see the table update.
+
+![Live demo of web app](public/readme/WebAppDemo.gif)
