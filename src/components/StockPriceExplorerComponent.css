@@ -1,4 +1,4 @@
-.container {
+.explorer-container {
   background-color: #fff;
 
   max-height: 100%;
@@ -13,7 +13,7 @@
   border-radius: 4px;
 }
 
-.header {
+.explorer-header {
   margin-bottom: 10px;
 
   height: 40px;
@@ -29,23 +29,19 @@
   border-bottom: 2px dotted #ddd;
 }
 
-.body {
-  background-color: green;
-
+.explorer-body {
   height: 525px;
 
   display: flex;
   flex-direction: row;
 }
 
-.checklist {
-  background-color: blue;
-
+.explorer-checklist {
   height: 100%;
   width: 30%;
 }
 
-.data {
+.explorer-data {
   background-color: red;
 
   height: 100%;

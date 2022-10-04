@@ -1,0 +1,15 @@
+.checklist-item-container {
+  margin-bottom: 4px;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.checklist-item-checkbox {
+  margin-left: 3px;
+  margin-right: 5px;
+}
+
+.checklist-item-ticker-ticked {
+  color: red;
+}
